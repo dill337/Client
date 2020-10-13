@@ -1,0 +1,46 @@
+.movie-view-card{
+  padding: 25px;
+  max-width: 150px;
+
+  .movie-view {
+    display: flex;
+    align-content: right;
+    
+
+    .label{
+      font-weight: 700;
+    }
+
+    .title {
+      font-style: italic;
+    }
+
+    .movie-description,
+    .movie-genre,
+    .movie-director,
+    .back-button {
+      display: flex;
+      flex-flow: column wrap;
+    }
+
+
+    .buttons-container{
+      padding: 30px 0 0 0;
+    }
+  }
+
+
+ 
+ 
+}
+
+.movie-title {
+  text-align: center;
+  font-weight: Bold;
+  font-size: 30px;
+}
+
+img{
+  width: 350px;
+  margin-left: 25%;
+}

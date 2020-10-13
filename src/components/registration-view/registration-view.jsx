@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import { LoginView } from '../login-view/login-view';
 
@@ -49,8 +51,8 @@ export function RegistrationView(props) {
         <input type="dob" value={dob} onChange={e => setDob(e.target.value)} />
         </label>
       </div>
-      <button type="button" onClick={handleSubmit}>Submit</button>
-      <button type="button" onClick={noRegister}>Go Back</button>
+      <Button type="button" onClick={handleSubmit}>Submit</Button>
+      <Button type="button" onClick={noRegister}>Go Back</Button>
     </form>
   );
 }

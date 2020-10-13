@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -26,8 +28,8 @@ export function LoginView(props) {
         </label>
       </div>
       <div>
-        <button type="button" onClick={handleSubmit}>Submit</button>
-        <button type="button" onClick={props.onRegisterClick}>New User</button>
+        <Button type="button" onClick={handleSubmit}>Submit</Button>
+        <Button type="button" onClick={props.onRegisterClick}>New User</Button>
       </div>
     </form>
   );

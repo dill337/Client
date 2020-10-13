@@ -26,33 +26,25 @@ export function RegistrationView(props) {
 
 
   return (
-    <form>
-      <div>
-        <label>
-          Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email:
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Dob:
-        <input type="dob" value={dob} onChange={e => setDob(e.target.value)} />
-        </label>
-      </div>
-      <Button type="button" onClick={handleSubmit}>Submit</Button>
-      <Button type="button" onClick={noRegister}>Go Back</Button>
-    </form>
+    <Form>
+      <Form.Group controlId="formBasicUsername">
+        <Form.Label>Enter New Username</Form.Label>
+        <Form.Control type="text" placeholder="New Username" value={username} onChange={e => setUsername(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Enter New Password</Form.Label>
+        <Form.Control type="text" placeholder="New Password" value={password} onChange={e => setUsername(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Enter User Email</Form.Label>
+        <Form.Control type="text" placeholder="User Email" value={email} onChange={e => setEmail(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBasicDateOfBirth">
+        <Form.Label>Enter Date of Birth</Form.Label>
+        <Form.Control type="date" value={dob} onChange={e => setDob(e.target.value)} />
+      </Form.Group>
+      <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
+      <Button variant="secondary" type="button" onClick={noRegister}>Go Back</Button>
+    </Form>
   );
 }

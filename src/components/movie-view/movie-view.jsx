@@ -3,6 +3,8 @@ import { MainView } from '../main-view/main-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { Button, Container, Row, Card, Col } from 'react-bootstrap';
 
+import { Link } from "react-router-dom";
+
 import "./movie-view.scss";
 
 export class MovieView extends React.Component {
@@ -45,7 +47,15 @@ export class MovieView extends React.Component {
               <span className="value">{movie.Director.Name}</span>
             </div>
             <br></br>
-            <Button onClick={goBack}>Go Back</Button>
+            <Link to={`/genres/Action`}>
+              <Button variant="link">Genre</Button>
+            </Link>
+            <Link to={`/Directors/Mel Gibson`}>
+              <Button variant="link">Director</Button>
+            </Link>
+            <Link to={`/`}>
+              <Button /*onClick={() => onClick(movie)} */ variant="link">Go Back</Button>
+            </Link>
           </Card>
         </div>
         <br></br>

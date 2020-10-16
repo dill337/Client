@@ -3,6 +3,9 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from "react-router-dom";
+
+
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -34,8 +37,15 @@ export function LoginView(props) {
         <Form.Control type="password" placeholder="Enter Password" value={password} onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <div>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-        <Button variant="secondary" type="button" onClick={props.onRegisterClick}>New User</Button>
+        {/* <Link to={`/movies`}> */}
+        {/* <Button onClick={() => onClick(movie)} variant="link">Log In</Button> */}
+        <Button type="button" onClick={handleSubmit}>Login</Button>
+        {/* </Link> */}
+        {/* <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button> */}
+        <Link to={`/register`}>
+          <Button variant="link">New User</Button>
+          {/* <Button variant="link" type="button" onClick={props.onRegisterClick}>New User</Button> */}
+        </Link>
       </div>
     </Form>
   );

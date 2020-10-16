@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 
 import { LoginView } from '../login-view/login-view';
+import { MainView } from '../main-view/main-view';
+
+import { Link } from "react-router-dom";
+
+
 import "./registration-view.scss"
 
 export function RegistrationView(props) {
@@ -11,6 +17,22 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [dob, setDob] = useState('');
 
+
+  const onRegister = () => {
+    axios.post('https://mymoviepull.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: dob,
+    })
+      .then(response => {
+        props.onRegister(response.data)
+        localStorage.setItem('user', JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,8 +66,15 @@ export function RegistrationView(props) {
         <Form.Label>Enter Date of Birth</Form.Label>
         <Form.Control type="date" value={dob} onChange={e => setDob(e.target.value)} />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
-      <Button variant="secondary" type="button" onClick={noRegister}>Go Back</Button>
+      <Link to={`/login`}>
+        <Button variant="link" type="button" onClick={onRegister}>New User</Button>
+      </Link>
+      {/* <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button> */}
+      <Link to={`/`}>
+        <Button onClick={() => onClick(movie)} variant="link">Go Back</Button>
+        {/* <Button variant="link" type="button" onClick={props.onRegisterClick}>New User</Button> */}
+      </Link>
+      {/* <Button variant="secondary" type="button" onClick={noRegister}>Go Back</Button> */}
     </Form>
   );
 }

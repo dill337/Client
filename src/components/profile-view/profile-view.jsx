@@ -2,37 +2,29 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
-
-import { LoginView } from '../login-view/login-view';
-
 import { Link } from "react-router-dom";
-
-
-
 export function ProfileView(props) {
-  const user = JSON.parse(localStorage.getItem('user'))
-  const [username, setUsername] = useState(user.Username);
-  const [password, setPassword] = useState(user.Password);
-  const [email, setEmail] = useState(user.Email);
-  const [dob, setDob] = useState(user.Birthday);
-  const [favoritemovies, setFavoriteMovies] = useState(user.FavoriteMovies);
-
-
-
-  const movieSubmit = (e) => {
-    e.preventDefault();
-    axios.put(`https://mymoviepull.herokuapp.com/users/${username}/Movies/${favoritemovies}`, {
-    }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+  const [username, setUsername] = useState(props.user.Username);
+  const [password, setPassword] = useState(props.user.Password);
+  const [email, setEmail] = useState(props.user.Email);
+  const [dob, setDob] = useState(props.user.Birthday);
+  const [favoritemovies, setFavoriteMovies] = useState(props.user.FavoriteMovies);
+  const removeFromFavorites = (movieId) => {
+    console.log(props.token)
+    axios.delete(`https://mymoviepull.herokuapp.com/users/${props.user.Username}/Movies/${movieId}`, {
+      headers: {
+        Authorization: `Bearer ${props.token}`
+      }
+    })
       .then(response => {
-        const data = response.data;
-        console.log(data);
-        alert('User Successfully Updated Favorite Movies')
+        console.log(response)
+        props.reloadUser()
       })
-      .catch(e => {
-        console.log('error updating movies')
-      })
-  };
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // send a request to the server for authentication
@@ -52,28 +44,24 @@ export function ProfileView(props) {
       .catch(e => {
         console.log('error updating user')
       })
-  };
-
-
-
+  }; console.log(props)
   return (
     <div>
       <Form action="movieSubmit">
         <Form.Group controlId="formBasicMovieList">
           <Form.Label>Favorite Movies</Form.Label>
           {
-            user.FavoriteMovies.map((movie) => {
+            props.user.FavoriteMovies.map((movie, index) => {
               const favorite = props.movies.find((mv) => mv._id === movie)
-              return (<div>
-                {favorite.Title}
+              return (<div key={index}>
+                {favorite ? favorite.Title : ""}
+                <Button onClick={() => removeFromFavorites(movie)}>
+                  Delete
+                </Button>
               </div>)
             })
           }
-          {/* <Form.Control type="text" value={favoritemovies} onChange={e => setFavoriteMovies(e.target.value)} /> */}
         </Form.Group>
-        {user && <Button onClick={movieSubmit}>
-          <b>Update Favorite Movies</b>
-        </Button>}
       </Form>
       <Form>
         <Form.Group controlId="formBasicUsername">
@@ -96,7 +84,7 @@ export function ProfileView(props) {
         <Link to={`/`}>
           <Button /*onClick={() => onClick(movie)} */ variant="link">Go Back</Button>
         </Link>
-        {user && <Button onClick={() => this.deRegister()}>
+        {props.user && <Button onClick={() => this.deRegister()}>
           <b>Delete Account</b>
         </Button>}
       </Form>

@@ -80,13 +80,26 @@ export class MainView extends React.Component {
       user
     });
   }
-  onLoggedOut() {
+  onLoggedOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
       user: null,
     });
     window.open('/', '_self');
+  }
+  reloadUser = () => {
+    axios.get(`https://mymoviepull.herokuapp.com/users/${this.state.user.Username}`, {
+      headers: { Authorization: `Bearer ${this.state.token}` }
+    })
+      .then(response => {
+        this.setState({
+          user: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onUpdate = (token) => {
@@ -151,7 +164,7 @@ export class MainView extends React.Component {
 
             }}
           />
-          <Route exact path="/profile" render={() => <ProfileView user={user} movies={movies} />} />
+          <Route exact path="/profile" render={() => <ProfileView user={user} movies={movies} token={token} reloadUser={this.reloadUser} />} />
 
 
 
@@ -161,6 +174,7 @@ export class MainView extends React.Component {
             path="/movies/:movieId"
             render={({ match }) => (
               <MovieView
+                reloadUser={this.reloadUser}
                 token={token}
                 user={user}
                 movie={movies.find((m) => m._id === match.params.movieId)}

@@ -16,13 +16,13 @@ export class MovieView extends React.Component {
   }
   addToFavorites = (token) => {
     //getMovies(token) {
-    axios.put(`https://mymoviepull.herokuapp.com/users/${this.props.user.Username}/Movies/${this.props.movie._id}`, {
-      headers: { Authorization: `Bearer ${this.props.token}` }
-    }, {})
+    axios.put(`https://mymoviepull.herokuapp.com/users/${this.props.user.Username}/Movies/${this.props.movie._id}`, {}, {
+      headers: {
+        Authorization: `Bearer ${this.props.token}`
+      }
+    })
       .then(response => {
-        this.setState({
-          movies: response.data
-        });
+        this.props.reloadUser()
       })
       .catch(function (error) {
         console.log(error);

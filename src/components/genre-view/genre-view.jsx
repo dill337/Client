@@ -11,20 +11,22 @@ import { Link } from "react-router-dom";
 
 export class GenreView extends React.Component {
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // send a request to the server for authentication
-    axios.get('https://mymoviepull.herokuapp.com/genre/')
-      .then(response => {
-        const data = response.data;
-        localStorage.setItem('user', JSON.stringify(data));
-        console.log(data);
-        window.open('/', '_self'); //lets page open in the current tab
-      })
-      .catch(e => {
-        console.log('error updating user')
-      })
-  };
+  /* handleSubmit = (e) => {
+     e.preventDefault();
+     // send a request to the server for authentication
+     axios.get('https://mymoviepull.herokuapp.com/genre/')
+       //axios.get(`https://mymoviepull.herokuapp.com/movies/${movie.Name}/genre`)
+       .then(response => {
+         const data = response.data;
+         localStorage.setItem('user', JSON.stringify(data));
+         console.log(data);
+         console.log('helklo')
+         window.open('/', '_self'); //lets page open in the current tab
+       })
+       .catch(e => {
+         console.log('error updating user')
+       })
+   };*/
   render() {
     const { movie, onClick } = this.props;
     console.log(this.props);

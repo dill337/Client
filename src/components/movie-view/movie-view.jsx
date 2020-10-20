@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { MainView } from '../main-view/main-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { Button, Container, Row, Card, Col } from 'react-bootstrap';
@@ -13,6 +14,23 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+  addToFavorites = (token) => {
+    //getMovies(token) {
+    axios.put(`https://mymoviepull.herokuapp.com/users/${this.props.user.Username}/Movies/${this.props.movie._id}`, {
+      headers: { Authorization: `Bearer ${this.props.token}` }
+    }, {})
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+
 
   render() {
     const { movie, goBack } = this.props;
@@ -47,15 +65,19 @@ export class MovieView extends React.Component {
               <span className="value">{movie.Director.Name}</span>
             </div>
             <br></br>
-            <Link to={`/genres/Action`}>
+            {/* <Link to={`${movie.Name}/Genre`}> */}
+            <Link to={`/genres/${movie.Genre.Name}`}>
               <Button variant="link">Genre</Button>
             </Link>
-            <Link to={`/Directors/Mel Gibson`}>
+            <Link to={`/Director/${movie.Director.Name}`}>
               <Button variant="link">Director</Button>
             </Link>
             <Link to={`/`}>
               <Button /*onClick={() => onClick(movie)} */ variant="link">Go Back</Button>
             </Link>
+            <Button onClick={this.addToFavorites}>
+              Add to Favorites
+            </Button>
           </Card>
         </div>
         <br></br>

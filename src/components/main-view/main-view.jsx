@@ -32,16 +32,20 @@ export class MainView extends React.Component {
       user: null
     };
   }
-  componentDidMount() {
+  componentDidMount = () => {
+    //componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: JSON.parse(localStorage.getItem('user'))
+        user: JSON.parse(localStorage.getItem('user')),
+
+        token: accessToken
       });
       this.getMovies(accessToken);
     }
   }
-  onLoggedIn(authData) {
+  onLoggedIn = (authData) => {
+    //onLoggedIn(authData) {
     console.log(authData);
     this.setState({
       user: authData.user
@@ -50,7 +54,8 @@ export class MainView extends React.Component {
     localStorage.setItem('user', JSON.stringify(authData.user));
     this.getMovies(authData.token);
   }
-  getMovies(token) {
+  getMovies = (token) => {
+    //getMovies(token) {
     axios.get('https://mymoviepull.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -64,7 +69,8 @@ export class MainView extends React.Component {
       });
   }
 
-  onMovieClick(movie) {
+  onMovieClick = (movie) => {
+    //onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
@@ -83,6 +89,24 @@ export class MainView extends React.Component {
     window.open('/', '_self');
   }
 
+  onUpdate = (token) => {
+    axios.put('https://mymoviepull.herokuapp.com/users/:Username', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          userUpdated: true
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  deRegister = () => {
+    this.setState({
+      register: false
+    })
+  }
 
   onRegisterClick = () => {
     this.setState({
@@ -97,7 +121,7 @@ export class MainView extends React.Component {
   render() {
     //if the state isn't initialized, ths will throw on runtime
     //befor the datq is initially loaded
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, selectedMovie, user, register, token } = this.state;
 
     //if (!user && !register) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegisterClick={this.onRegisterClick} />;
     //before the movies have been loaded
@@ -121,12 +145,13 @@ export class MainView extends React.Component {
                     <Button className="button" variant="link">Profile</Button>
                   </Link>
                 }
-                {movies.map(m => <MovieCard key={m._id} movie={m} />)}
+                {movies.map(m => <MovieCard onClick={this.onMovieClick} key={m._id} movie={m} />)}
+                {/* {movies.map(m => <MovieCard key={m._id} movie={m} />)} */}
               </div>
 
             }}
           />
-          <Route exact path="/profile" render={() => <ProfileView user={user} />} />
+          <Route exact path="/profile" render={() => <ProfileView user={user} movies={movies} />} />
 
 
 
@@ -136,6 +161,8 @@ export class MainView extends React.Component {
             path="/movies/:movieId"
             render={({ match }) => (
               <MovieView
+                token={token}
+                user={user}
                 movie={movies.find((m) => m._id === match.params.movieId)}
               />
             )}
@@ -143,13 +170,16 @@ export class MainView extends React.Component {
 
           <Route
             exact
-            path="/directors/:name"
+            path="/Director/:name"
             render={({ match }) => {
               if (!movies) return <div className="main-view" />;
               return (
                 <DirectorView
                   movie={
-                    movies.find((m) => m.Director.Name === match.params.name)
+                    //movies.find((m) => m.Director.Name === match.params.name)
+                    selectedMovie
+
+                    // movies.find((m) => m.Director.Name === match.params.name)
                   }
                 />
               );
@@ -163,7 +193,23 @@ export class MainView extends React.Component {
               return (
                 <GenreView
                   movie={
-                    movies.find((m) => m.Genre.Name === match.params.name)
+                    selectedMovie
+                    /*// movies.find((m) => m.Genre.Name === match.params.name)
+                    //}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/:Title/genre"
+                render={({ match }) => {
+                  if (!movies) return <div className="main-view" />
+                  return (
+                    <GenreView */
+                    //movie={
+                    //movies.find((m) => m.Genre.Name === match.params.name)
+                    // movies.find((m) => m.Title === match.params.Title)
                   }
                 />
               );

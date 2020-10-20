@@ -12,28 +12,28 @@ import { Link } from "react-router-dom";
 
 export class DirectorView extends React.Component {
 
-  constructor() {
-    super();
+  /* constructor() {
+     super();
+ 
+     this.state = {};
+   }*/
 
-    this.state = {};
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // send a request to the server for authentication
-    axios.get('https://mymoviepull.herokuapp.com/movies/Director/')
-      .then(response => {
-        const data = response.data;
-        localStorage.setItem('user', JSON.stringify(data));
-        console.log(data);
-        window.open('/', '_self'); //lets page open in the current tab
-      })
-      .catch(e => {
-        console.log('error updating user')
-      })
-  };
+  /* handleSubmit = (e) => {
+     e.preventDefault();
+     // send a request to the server for authentication
+     axios.get(`https://mymoviepull.herokuapp.com/Director/`)
+       .then(response => {
+         const data = response.data;
+         localStorage.setItem('user', JSON.stringify(data));
+         console.log(data);
+         window.open('/', '_self'); //lets page open in the current tab
+       })
+       .catch(e => {
+         console.log('error updating user')
+       })
+   };*/
   render() {
-    const { movie, Director } = this.props;
+    const { movie, onClick } = this.props;
     console.log(this.props);
     return (
       <Container>

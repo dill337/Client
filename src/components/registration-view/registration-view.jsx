@@ -28,6 +28,7 @@ export function RegistrationView(props) {
       .then(response => {
         props.onRegister(response.data)
         localStorage.setItem('user', JSON.stringify(response.data));
+        window.open('/client', '_self');
       })
       .catch(function (error) {
         console.log(error);

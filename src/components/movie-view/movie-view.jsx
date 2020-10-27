@@ -70,7 +70,7 @@ export class MovieView extends React.Component {
               <Button variant="link">Genre</Button>
             </Link>
             <Link to={`/Director/${movie.Director.Name}`}>
-              <Button variant="link">Director</Button>
+              <Button variant="link">Director: {movie.Director.Name}</Button>
             </Link>
             <Link to={`/`}>
               <Button /*onClick={() => onClick(movie)} */ variant="link">Go Back</Button>

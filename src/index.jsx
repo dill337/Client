@@ -9,7 +9,9 @@ import moviesApp from './reducers/reducers';
 //import statment to indicate that you need to bundle `./index.scss
 import './index.scss';
 
+
 const store = createStore(moviesApp);
+// const path = require("path");
 //main component (will eventually use all the others)
 class MyFlixApplication extends React.Component {
   render() {

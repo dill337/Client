@@ -10,18 +10,20 @@ const mapStateToProps = state => {
 };
 
 function MoviesList(props) {
-  const { movies, visibilityFilter } = props;
+  const { movies, /*directors,*/ visibilityFilter } = props;
   let filteredMovies = movies;
+  //let filteredDirectors = directors;
 
   if (visibilityFilter !== '') {
     filteredMovies = movies.filter(m => m.Title.includes(visibilityFilter));
+    //filteredDirectors = directors.movies.filter(m => m.Name.includes(visibilityFilter));
   }
 
   if (!movies) return <div className="main-view" />;
 
-  return <div className="movies-list">
+  return <div className="row">
     <VisibilityFilterInput visibilityFilter={visibilityFilter} />
-    {filteredMovies.map(m => <MovieCard key={m._id} movie={m} />)};
+    {filteredMovies.map(m => <MovieCard onMovieClick={props.onMovieClick} key={m._id} movie={m} />)};
   </div>
 }
 

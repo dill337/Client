@@ -24,7 +24,7 @@ export function ProfileView(props) {
         console.log(error);
       });
   }
-
+  console.log(props.user)
   const handleSubmit = (e) => {
     e.preventDefault();
     // send a request to the server for authentication

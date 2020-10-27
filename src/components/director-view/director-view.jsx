@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button, Container, Row, Card, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 //import "./genre-card.scss"
 
@@ -58,4 +59,25 @@ export class DirectorView extends React.Component {
       </Container>
     );
   }
+}
+
+DirectorView.propTypes = {
+  director: PropTypes.exact({
+    _id: PropTypes.string,
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string,
+  }).isRequired,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      Title: PropTypes.string,
+      ImageUrl: PropTypes.string,
+      Description: PropTypes.string,
+      Genre: PropTypes.shape({
+        _id: PropTypes.string,
+        Name: PropTypes.string,
+        Description: PropTypes.string
+      })
+    })
+  ),
 }

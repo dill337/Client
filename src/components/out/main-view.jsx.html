@@ -1,4 +1,32 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -187,44 +215,44 @@ export class MainView extends React.Component {
     let { movies } = this.props;
     let { user, selectedMovie, token } = this.state;
 
-    //if (!user && !register) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegisterClick={this.onRegisterClick} />;
+    //if (!user &amp;&amp; !register) return &lt;LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegisterClick={this.onRegisterClick} />;
     //before the movies have been loaded
-    //if (!user && register) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} notLogged={this.notLogged} />
-    //if (!movies) return <div className="main-view" />;
+    //if (!user &amp;&amp; register) return &lt;RegistrationView onLoggedIn={user => this.onLoggedIn(user)} notLogged={this.notLogged} />
+    //if (!movies) return &lt;div className="main-view" />;
     return (
-      <Router basename="/client">
-        <div className="main-view">
-          <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return <div>
+      &lt;Router basename="/client">
+        &lt;div className="main-view">
+          &lt;Route exact path="/" render={() => {
+            if (!user) return &lt;LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return &lt;div>
               {
-                user && <Link to={`/profile`}>
-                  <Button className="button" variant="link">Profile</Button>
-                </Link>
+                user &amp;&amp; &lt;Link to={`/profile`}>
+                  &lt;Button className="button" variant="link">Profile&lt;/Button>
+                &lt;/Link>
               }
               {
-                user && <Button onClick={() => this.onLoggedOut()}>
-                  <b>Log Out</b>
-                </Button>
+                user &amp;&amp; &lt;Button onClick={() => this.onLoggedOut()}>
+                  &lt;b>Log Out&lt;/b>
+                &lt;/Button>
               }
-              <MoviesList onMovieClick={this.onMovieClick} movies={movies} />
-            </div>
+              &lt;MoviesList onMovieClick={this.onMovieClick} movies={movies} />
+            &lt;/div>
           }} />
-          <Route path="/register" render={() => <RegistrationView />} />
-          <Route exact path="/profile" render={() => <ProfileView user={user} movies={movies} token={token} reloadUser={this.reloadUser} />} />
-          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} user={user} />} />
-          {/* <Route path="/directors/:name" render={({ match }) => {
-            if (!movies) return <div className="main-view" />;
-            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+          &lt;Route path="/register" render={() => &lt;RegistrationView />} />
+          &lt;Route exact path="/profile" render={() => &lt;ProfileView user={user} movies={movies} token={token} reloadUser={this.reloadUser} />} />
+          &lt;Route path="/movies/:movieId" render={({ match }) => &lt;MovieView movie={movies.find(m => m._id === match.params.movieId)} user={user} />} />
+          {/* &lt;Route path="/directors/:name" render={({ match }) => {
+            if (!movies) return &lt;div className="main-view" />;
+            return &lt;DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
           }
           } /> */}
-          <Route
+          &lt;Route
             exact
             path="/Director/:name"
             render={({ match }) => {
-              if (!movies) return <div className="main-view" />;
+              if (!movies) return &lt;div className="main-view" />;
               return (
-                <DirectorView
+                &lt;DirectorView
                   movie={
                     selectedMovie
                   }
@@ -232,13 +260,13 @@ export class MainView extends React.Component {
               )
             }}
           />
-          <Route
+          &lt;Route
             exact
             path="/genres/:name"
             render={({ match }) => {
-              if (!movies) return <div className="main-view" />
+              if (!movies) return &lt;div className="main-view" />
               return (
-                <GenreView
+                &lt;GenreView
                   movie={
                     selectedMovie
                   }
@@ -246,8 +274,8 @@ export class MainView extends React.Component {
               )
             }}
           />
-        </div>
-      </Router>
+        &lt;/div>
+      &lt;/Router>
     )
   }
 }
@@ -259,3 +287,26 @@ let mapStateToProps = state => {
 
 //#4 
 export default connect(mapStateToProps, { setMovies })(MainView)
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#deregister">deregister</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#notLogged">notLogged</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#onMovieClick">onMovieClick</a></li><li><a href="global.html#onRegister">onRegister</a></li><li><a href="global.html#onRegisterClick">onRegisterClick</a></li><li><a href="global.html#onUpdate">onUpdate</a></li><li><a href="global.html#reloadUser">reloadUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Jan 17 2021 15:31:58 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -82,7 +82,7 @@ export function ProfileView(props) {
         </Form.Group>
         <Button variant="primary" type="submit" onClick={handleSubmit}>Update</Button>
         <Link to={`/`}>
-          <Button /*onClick={() => onClick(movie)} */ variant="link">Go Back</Button>
+          <Button variant="link">Go Back</Button>
         </Link>
         {props.user && <Button onClick={() => this.deRegister()}>
           <b>Delete Account</b>

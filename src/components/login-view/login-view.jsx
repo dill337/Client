@@ -5,7 +5,13 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from "react-router-dom";
 
-
+/**
+ * renders login page authentication 
+ * @function LoginView
+ * @param {*} props 
+ * @param { string } username
+ * @param { string } password 
+ */
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

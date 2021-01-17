@@ -3,9 +3,6 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 
-import { LoginView } from '../login-view/login-view';
-import { MainView } from '../main-view/main-view';
-
 import { Link } from "react-router-dom";
 
 
@@ -18,6 +15,10 @@ export function RegistrationView(props) {
   const [dob, setDob] = useState('');
 
 
+  /**
+   * registers new users
+   * @function onRegister
+   */
   const onRegister = () => {
     axios.post('https://mymoviepull.herokuapp.com/users', {
       Username: username,
@@ -42,6 +43,10 @@ export function RegistrationView(props) {
     props.onLoggedIn(username)
   };
 
+  /**
+   * when potential user doesn't register
+   * @function noRegister 
+   */
   const noRegister = (e) => {
     e.preventDefault();
     console.log('go back')
